@@ -97,7 +97,7 @@ function Sidebar({ onSelectUser, clearSelection }) {
                 <Fab color="secondary" aria-label="edit" onClick={menuAnchor ? closeMenu : openMenu}>
                     {editMode ? <CloseIcon /> : <EditIcon />}
                 </Fab>
-                <Menu
+                <Menu 
                     anchorEl={menuAnchor}
                     open={Boolean(menuAnchor)}
                     onClose={closeMenu}
@@ -110,19 +110,26 @@ function Sidebar({ onSelectUser, clearSelection }) {
                         horizontal: 'right',
                     }}
                     getContentAnchorEl={null}
+                    sx={{ 
+                        '& .MuiPaper-root': {
+                            backgroundColor: '#212121', // Change background color here
+                            width: '200px', // Adjust width if needed
+                        },
+                    }}
+                   
                 >
                     <MenuItem onClick={closeMenu} >
-                        <CampaignOutlinedIcon />
-                        <span className='ml-2'>New Channel</span>
+                        <CampaignOutlinedIcon  className='text-white'/>
+                        <span className='ml-2 text-sm text-white'>New Channel</span>
                     </MenuItem>
                     <MenuItem onClick={closeMenu} >
-                        <GroupOutlinedIcon  />
-                        <span className='ml-2'> New Group  </span>
+                        <GroupOutlinedIcon className='text-white' />
+                        <span className='ml-2 text-sm text-white'> New Group  </span>
 
                     </MenuItem>
                     <MenuItem onClick={closeMenu} >
-                        <Person2OutlinedIcon />
-                        <span className='ml-2'>  New Private Chat </span>
+                        <Person2OutlinedIcon className='text-white' />
+                        <span className='ml-2 text-sm text-white'>  New Private Chat </span>
                     </MenuItem>
                 </Menu>
             </div>
