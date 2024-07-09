@@ -15,7 +15,7 @@ function Sidebar({ onSelectUser, clearSelection }) {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [menuAnchor, setMenuAnchor] = useState(null);
-    const [editMode, setEditMode] = useState(false); // State to toggle between EditIcon and CloseIcon
+    const [editMode, setEditMode] = useState(false); 
 
     useEffect(() => {
         const fetchChats = async () => {
@@ -54,12 +54,12 @@ function Sidebar({ onSelectUser, clearSelection }) {
 
     const openMenu = (event) => {
         setMenuAnchor(event.currentTarget);
-        setEditMode(true); // Always show CloseIcon when menu opens
+        setEditMode(true); 
     };
 
     const closeMenu = () => {
         setMenuAnchor(null);
-        setEditMode(false); // Show EditIcon when menu closes
+        setEditMode(false); 
     };
 
     const formatDate = (dateTimeString) => {
@@ -71,12 +71,12 @@ function Sidebar({ onSelectUser, clearSelection }) {
     };
 
     return (
-        <div className='py-2 px-2 overflow-y-scroll custom-scrollbar'>
+        <div className='py-2 px-2 relative overflow-y-scroll custom-scrollbar '>
             {users.length > 0 ? (
                 users.map(user => (
                     <div>
                         <div key={user.id}
-                            className={`flex flex-row justify-between items-center py-2 px-4 cursor-pointer 
+                            className={`flex flex-row justify-between  py-2 px-4 cursor-pointer 
                                      ${selectedUser && selectedUser.id === user.id ? 'bg-[#8774E1] rounded-lg' : ''}
                                      ${selectedUser && selectedUser.id !== user.id ? 'hover:bg-[#2B2B2B] hover:rounded-lg' : ''}`}
                             onClick={() => handleUserClick(user)}>
@@ -85,7 +85,7 @@ function Sidebar({ onSelectUser, clearSelection }) {
                                     sx={{ width: 55, height: 55 }} />
                                 <div className='text-white'>{user.creator.name || user.created_by}</div>
                             </div>
-                            <div className='text-white text-xs'>
+                            <div className='text-white text-xs '>
                                 {formatDate(user.updated_at).date} <br />
                                 {formatDate(user.updated_at).time}
                             </div>
@@ -97,10 +97,10 @@ function Sidebar({ onSelectUser, clearSelection }) {
                     </div>
                 ))
             ) : (
-                <p>Loading...</p>
+                <p className='text-white text-center'>Loading...</p>
             )}
 
-            <div className="absolute bottom-4 right-4">
+            <div className="fixed bottom-4 right-4">
                 <Fab color="secondary" aria-label="edit" onClick={menuAnchor ? closeMenu : openMenu}>
                     {editMode ? <CloseIcon /> : <EditIcon />}
                 </Fab>
@@ -119,8 +119,8 @@ function Sidebar({ onSelectUser, clearSelection }) {
                     getContentAnchorEl={null}
                     sx={{
                         '& .MuiPaper-root': {
-                            backgroundColor: '#212121', // Change background color here
-                            width: '200px', // Adjust width if needed
+                            backgroundColor: '#212121', 
+                            width: '200px', 
                         },
                     }}
 

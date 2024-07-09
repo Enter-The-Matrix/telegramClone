@@ -24,7 +24,7 @@ function MainLayout() {
 
     const handleSendMessage = (message) => {
         const newMessage = {
-            sender_id: 1, // Assuming the current user has sender_id 1
+            sender_id: 1, 
             message,
             created_at: new Date().toISOString(),
         };
