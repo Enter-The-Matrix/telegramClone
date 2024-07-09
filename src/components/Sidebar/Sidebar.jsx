@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
+import Divider from '@mui/material/Divider';
 
 function Sidebar({ onSelectUser, clearSelection }) {
     const [users, setUsers] = useState([]);
@@ -73,19 +74,25 @@ function Sidebar({ onSelectUser, clearSelection }) {
         <div className='py-2 px-2 overflow-y-scroll custom-scrollbar'>
             {users.length > 0 ? (
                 users.map(user => (
-                    <div key={user.id}
-                        className={`flex flex-row justify-between items-center py-2 px-4 cursor-pointer 
+                    <div>
+                        <div key={user.id}
+                            className={`flex flex-row justify-between items-center py-2 px-4 cursor-pointer 
                                      ${selectedUser && selectedUser.id === user.id ? 'bg-[#8774E1] rounded-lg' : ''}
                                      ${selectedUser && selectedUser.id !== user.id ? 'hover:bg-[#2B2B2B] hover:rounded-lg' : ''}`}
-                        onClick={() => handleUserClick(user)}>
-                        <div className='flex flex-row gap-2'>
-                            <Avatar alt={user.creator?.name || "-"} src="/static/images/avatar/1.jpg"
-                                sx={{ width: 55, height: 55 }} />
-                            <div className='text-white'>{user.creator.name || user.created_by}</div>
+                            onClick={() => handleUserClick(user)}>
+                            <div className='flex flex-row gap-2'>
+                                <Avatar alt={user.creator?.name || "-"} src="/static/images/avatar/1.jpg"
+                                    sx={{ width: 55, height: 55 }} />
+                                <div className='text-white'>{user.creator.name || user.created_by}</div>
+                            </div>
+                            <div className='text-white text-xs'>
+                                {formatDate(user.updated_at).date} <br />
+                                {formatDate(user.updated_at).time}
+                            </div>
                         </div>
-                        <div className='text-white text-xs'>
-                            {formatDate(user.updated_at).date} <br />
-                            {formatDate(user.updated_at).time}
+                        <div>
+                            <Divider variant="inset" sx={{ borderBottomWidth: '2px' }} />
+
                         </div>
                     </div>
                 ))
@@ -97,7 +104,7 @@ function Sidebar({ onSelectUser, clearSelection }) {
                 <Fab color="secondary" aria-label="edit" onClick={menuAnchor ? closeMenu : openMenu}>
                     {editMode ? <CloseIcon /> : <EditIcon />}
                 </Fab>
-                <Menu 
+                <Menu
                     anchorEl={menuAnchor}
                     open={Boolean(menuAnchor)}
                     onClose={closeMenu}
@@ -110,16 +117,16 @@ function Sidebar({ onSelectUser, clearSelection }) {
                         horizontal: 'right',
                     }}
                     getContentAnchorEl={null}
-                    sx={{ 
+                    sx={{
                         '& .MuiPaper-root': {
                             backgroundColor: '#212121', // Change background color here
                             width: '200px', // Adjust width if needed
                         },
                     }}
-                   
+
                 >
                     <MenuItem onClick={closeMenu} >
-                        <CampaignOutlinedIcon  className='text-white'/>
+                        <CampaignOutlinedIcon className='text-white' />
                         <span className='ml-2 text-sm text-white'>New Channel</span>
                     </MenuItem>
                     <MenuItem onClick={closeMenu} >
